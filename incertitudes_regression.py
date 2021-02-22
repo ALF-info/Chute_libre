@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 19 11:17:11 2021
-
-@author: anne-laurefrancois
-"""
-
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -21,7 +15,7 @@ def Alea(X):
     tirage = np.random.normal()   
     return X[0]+X[1]*tirage
 
-#%% Procedure Regression Linéaire; tableaux np X et Y (méthode des moindres carrés)
+#%% Procedure Regression Linéaire; tableaux np X et Y (méthode des moindres carrés)
     
 def RegLin(X,Y):
     N = len(X)
@@ -33,10 +27,10 @@ def RegLin(X,Y):
 
 #%% Entrées
     
-hauteur_chute = [0.600,0.550,0.500, 0.450,0.400]        # Liste contenant les hauteurs de chute (m)
-duree_chute = [0.350,0.335,0.319,0.303,0.286]           # Liste contenant les durées de chute (s)
-incertitude_duree_chute =  1e-3                         # Estimation de l'incertitude-type sur la durée de chute (s) 
-incertitude_hauteur_chute = 1e-3                        # Estimation de l'incertitude-type sur la hauteur de chute (m)                       
+hauteur_chute = []        # Liste contenant les hauteurs de chute (m)
+duree_chute = []           # Liste contenant les durées de chute (s)
+incertitude_duree_chute =                          # Estimation de l'incertitude-type sur la durée de chute (s) 
+incertitude_hauteur_chute =                         # Estimation de l'incertitude-type sur la hauteur de chute (m)                       
                                                       
 
 
@@ -49,6 +43,7 @@ for k in range(len(hauteur_chute)):
 Duree_chute = []
 for k in range(len(duree_chute)):
     Duree_chute.append([(duree_chute[k]), incertitude_duree_chute])           # Remplit une liste de listes contenant les durées de chute assorties de leur incertitude 
+    
     
 #%% Méthode de Monte Carlo pour déterminer les incertitudes sur la pente et l'ordonnée à l'origine de la régression linéaire
     
@@ -84,8 +79,8 @@ incertitude_elargie_OrdOr = 2*incertitude_type_OrdOr                            
 
 print ('Pente de la droite de régression:', MoyPente, 'm/s^2')
 print('Incertitude élargie sur la pente :',incertitude_elargie_Pente, 'm/s^2')
-print("Ordonnée à l origine :",MoyOrdOr, 'm')
-print("Incertitude élargie sur l'ordonnée à l origine:",incertitude_elargie_OrdOr, 'm')
+print("Ordonnée à l origine :",MoyOrdOr, 'm')
+print("Incertitude élargie sur l'ordonnée à l origine:",incertitude_elargie_OrdOr, 'm')
 
 fig = plt.figure(figsize = (10, 10))                                                        # Crée une zone graphique
 plt.gcf().subplots_adjust(left = 0.1, bottom = 0.1,
@@ -98,7 +93,7 @@ ax1.set_title('Pour 100 000 iterations')
 
 ax2 = fig.add_subplot(2,1,2)                                                                # Crée le deuxième graphe de la figure
 ax2.hist(LOrdor, range = (-0.1, 0.1), bins = 50, color = 'blue', edgecolor = 'black')       # Affiche l'histogramme de répartion des valeurs simulées de l'ordonnée à l'origine
-ax2.set_xlabel("Ordonnée à l'origine (m)")
+ax2.set_xlabel("Ordonnée à l'origine (m)")
 ax2.set_ylabel('effectif')
 
 
